@@ -10,19 +10,19 @@ public interface ITreeSort
     public int Id { get; }
 
     /// <summary>
-    /// Gets name of a sort.
+    /// Gets the name of a sort.
     /// </summary>
     public string Name { get; }
 
     /// <summary>
-    /// Gets hegiht of a tree when it is fully mature.
+    /// Gets hegiht (CM) of a tree when it is fully mature.
     /// </summary>
-    public double MatureHeight { get; }
+    public double MatureHeightCm { get; }
 
     /// <summary>
-    /// Gets and width of a tree when it is fully mature.
+    /// Gets and width (CM) of a tree when it is fully mature.
     /// </summary>
-    public double MatureWidth { get; }
+    public double MatureWidthCm { get; }
 
     /// <summary>
     /// Gets the growth rate of a tree per year (in cm).
@@ -37,12 +37,12 @@ public interface ITreeSort
     /// <summary>
     /// Gets the required soil type for a tree.
     /// </summary>
-    public string SoilType { get; }
+    public SoilTypes SoilType { get; }
 
     /// <summary>
     /// Gets the required sun exposure type for a tree.
     /// </summary>
-    public string SunExposure { get; }
+    public SunExposures SunExposure { get; }
 
     /// <summary>
     /// Gets the average bear age for a tree.
@@ -57,5 +57,5 @@ public interface ITreeSort
     /// <summary>
     /// Gets and sets type of a tree.
     /// </summary>
-    public ITreeType TreeType { get; set; }
+    public int TreeTypeId { get; }
 }

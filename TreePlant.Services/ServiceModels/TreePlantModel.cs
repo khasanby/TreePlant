@@ -2,7 +2,7 @@
 
 namespace TreePlant.Services.ServiceModels
 {
-    public sealed class TreePlantModel : IPlantedTree
+    public sealed class TreePlantModel : ITreePlant
     {
         /// <summary>
         /// Gets the id of a tree.
@@ -12,7 +12,12 @@ namespace TreePlant.Services.ServiceModels
         /// <summary>
         /// Gets the sort name of a tree.
         /// </summary>
-        public int SortId { get; set; }
+        public int TreeSortId { get; set; }
+
+        /// <summary>
+        /// Gets and sets the count of trees to plant.
+        /// </summary>
+        public int TreeCount { get; set; }
 
         /// <summary>
         /// Gets the area where tree planted.

@@ -22,12 +22,12 @@ public sealed class TreeSortDb
     /// <summary>
     /// Gets and sets hegiht of a tree when it is fully mature.
     /// </summary>
-    public double MatureHeight { get; set; }
+    public double MatureHeightCm { get; set; }
 
     /// <summary>
     /// Gets and sets width of a tree when it is fully mature.
     /// </summary>
-    public double MatureWidth { get; set; }
+    public double MatureWidthCm { get; set; }
 
     /// <summary>
     /// Gets and sets the growth rate of a tree per year (in cm).
@@ -40,19 +40,19 @@ public sealed class TreeSortDb
     public HarvestTime HarvestTime { get; set; }
 
     /// <summary>
-    /// Gets and sets the required soil type for a tree.
+    /// Sets foreign key reference to SoilTypeDb table.
     /// </summary>
-    public string SoilType { get; set; }
+    public SoilTypes SoilType { get; set; }
 
     /// <summary>
-    /// Gets and sets the required sun exposure type for a tree.
+    /// Sets foreign key reference to sun exposure table.
     /// </summary>
-    public string SunExposure { get; set; }
+    public SunExposures SunExposure { get; set; }
 
     /// <summary>
     /// Gets and sets the average bear age for a tree.
     /// </summary>
-    public int BearingAge { get; set; }
+    public double BearingAge { get; set; }
 
     /// <summary>
     /// Gets and sets the price of a single tree.

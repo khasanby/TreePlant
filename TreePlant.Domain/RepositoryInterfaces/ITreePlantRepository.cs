@@ -7,5 +7,16 @@ public interface ITreePlantRepository
     /// <summary>
     /// Adds a new tree to planted trees table in db.
     /// </summary>
-    public Task<bool> AddAsync(IPlantedTree tree);
+    public Task AddAsync(ITreePlant tree);
+
+
+    /// <summary>
+    /// Gets all planted trees in a give area by area id.
+    /// </summary>
+    public Task<ITreePlant[]> GetPlantedTreesInArea(int areaId);
+
+    /// <summary>
+    /// Gets all planted trees from PlantedTrees table.
+    /// </summary>
+    public Task<ITreePlant[]> GetAllAsync();
 }

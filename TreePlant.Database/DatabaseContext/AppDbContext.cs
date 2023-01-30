@@ -20,7 +20,7 @@ namespace TreePlant.Database.DatabaseContext
         /// <summary>
         /// Planted Trees table.
         /// </summary>
-        public DbSet<PlantedTreeDb> PlantedTrees { get; set; }
+        public DbSet<TreePlantDb> PlantedTrees { get; set; }
 
         /// <summary>
         /// Tree types table.

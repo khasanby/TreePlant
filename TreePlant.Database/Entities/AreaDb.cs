@@ -20,5 +20,5 @@ public sealed class AreaDb
     /// Sets one-to-many relationshib with TreeDb table
     /// using lazy loading.
     /// </summary>
-    public ICollection<PlantedTreeDb> Trees { get; set; }
+    public ICollection<TreePlantDb> Trees { get; set; }
 }

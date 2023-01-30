@@ -11,7 +11,7 @@ using TreePlant.Database.DatabaseContext;
 namespace TreePlant.Database.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20230128100341_firstMigration")]
+    [Migration("20230128133130_firstMigration")]
     partial class firstMigration
     {
         /// <inheritdoc />
@@ -40,29 +40,6 @@ namespace TreePlant.Database.Migrations
                     b.ToTable("Areas");
                 });
 
-            modelBuilder.Entity("TreePlant.Database.Entities.PlantedTreeDb", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<int>("AreaId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("TreeSortId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("AreaId");
-
-                    b.HasIndex("TreeSortId");
-
-                    b.ToTable("PlantedTrees");
-                });
-
             modelBuilder.Entity("TreePlant.Database.Entities.TreeSortDb", b =>
                 {
                     b.Property<int>("Id")
@@ -71,8 +48,8 @@ namespace TreePlant.Database.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int>("BearingAge")
-                        .HasColumnType("int");
+                    b.Property<double>("BearingAge")
+                        .HasColumnType("float");
 
                     b.Property<double>("GrowthRateCm")
                         .HasColumnType("float");
@@ -80,10 +57,10 @@ namespace TreePlant.Database.Migrations
                     b.Property<int>("HarvestTime")
                         .HasColumnType("int");
 
-                    b.Property<double>("MatureHeight")
+                    b.Property<double>("MatureHeightCm")
                         .HasColumnType("float");
 
-                    b.Property<double>("MatureWidth")
+                    b.Property<double>("MatureWidthCm")
                         .HasColumnType("float");
 
                     b.Property<string>("Name")
@@ -94,11 +71,11 @@ namespace TreePlant.Database.Migrations
                     b.Property<double>("Price")
                         .HasColumnType("float");
 
-                    b.Property<string>("SoilType")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("SoilType")
+                        .HasColumnType("int");
 
-                    b.Property<string>("SunExposure")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("SunExposure")
+                        .HasColumnType("int");
 
                     b.Property<int>("TreeTypeId")
                         .HasColumnType("int");
@@ -128,7 +105,44 @@ namespace TreePlant.Database.Migrations
                     b.ToTable("TreeTypes");
                 });
 
-            modelBuilder.Entity("TreePlant.Database.Entities.PlantedTreeDb", b =>
+            modelBuilder.Entity("TreePlant.Database.Entities.TreesToPlantDb", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("AreaId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("TreeCount")
+                        .HasColumnType("int");
+
+                    b.Property<int>("TreeSortId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("AreaId");
+
+                    b.HasIndex("TreeSortId");
+
+                    b.ToTable("PlantedTrees");
+                });
+
+            modelBuilder.Entity("TreePlant.Database.Entities.TreeSortDb", b =>
+                {
+                    b.HasOne("TreePlant.Database.Entities.TreeTypeDb", "TreeType")
+                        .WithMany("TreeSorts")
+                        .HasForeignKey("TreeTypeId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("TreeType");
+                });
+
+            modelBuilder.Entity("TreePlant.Database.Entities.TreesToPlantDb", b =>
                 {
                     b.HasOne("TreePlant.Database.Entities.AreaDb", "Area")
                         .WithMany("Trees")
@@ -145,17 +159,6 @@ namespace TreePlant.Database.Migrations
                     b.Navigation("Area");
 
                     b.Navigation("TreeSort");
-                });
-
-            modelBuilder.Entity("TreePlant.Database.Entities.TreeSortDb", b =>
-                {
-                    b.HasOne("TreePlant.Database.Entities.TreeTypeDb", "TreeType")
-                        .WithMany("TreeSorts")
-                        .HasForeignKey("TreeTypeId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("TreeType");
                 });
 
             modelBuilder.Entity("TreePlant.Database.Entities.AreaDb", b =>

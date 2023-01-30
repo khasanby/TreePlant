@@ -2,7 +2,6 @@
 using TreePlant.Api.Helpers;
 using TreePlant.Domain.ServiceInterfaces;
 using TreePlant.Services.ServiceModels;
-using TreePlant.Services.Services;
 
 namespace TreePlant.Api.Controllers
 {
@@ -25,6 +24,26 @@ namespace TreePlant.Api.Controllers
         public async Task<IActionResult> PlantTreeAsync(TreePlantModel tree)
         {
             return await _plantTreeService.PlantTreeAsync(tree) ? Ok(ResponseMessages.PlantSuccess) : BadRequest(ResponseMessages.PlantFail);
+        }
+
+        /// <summary>
+        /// Gets all planted trees from PlantedTrees table.
+        /// </summary>
+        [HttpGet("get_all")]
+        public async Task<IActionResult> GetPlantedTreesAsync()
+        {
+            var plantedTrees = await _plantTreeService.GetPlantedTreesAsync();
+            return plantedTrees != null ? Ok(plantedTrees) : NotFound(ResponseMessages.NoTreeFound);
+        }
+
+        /// <summary>
+        /// Gets all planted trees from PlantedTrees table.
+        /// </summary>
+        [HttpGet("get_all_in_area/{id}")]
+        public async Task<IActionResult> GetPlantedTreesInAreaAsync(int id)
+        {
+            var plantedTrees = await _plantTreeService.GetPlantedTreesInArea(id);
+            return plantedTrees != null ? Ok(plantedTrees) : NotFound(ResponseMessages.NoTreeFound);
         }
     }
 }

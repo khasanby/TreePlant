@@ -1,5 +1,12 @@
-﻿namespace TreePlant.Domain.RepositoryInterfaces;
+﻿using TreePlant.Domain.ModelInterfaces;
 
-public interface ITreeSortRepository
+namespace TreePlant.Domain.RepositoryInterfaces
 {
+    public interface ITreeSortRepository
+    {
+        /// <summary>
+        /// Gets the required tree sort by sort id.
+        /// </summary>
+        public Task<ITreeSort> GetByIdAsync(int id);
+    }
 }

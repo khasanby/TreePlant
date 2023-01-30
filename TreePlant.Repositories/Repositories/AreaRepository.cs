@@ -2,8 +2,8 @@
 using AutoMapper.QueryableExtensions;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
-using TreePlant.Database.Entities;
 using TreePlant.Database.DatabaseContext;
+using TreePlant.Database.Entities;
 using TreePlant.Domain.ModelInterfaces;
 using TreePlant.Domain.RepositoryInterfaces;
 using TreePlant.Repositories.RepositoryModels;
@@ -16,7 +16,7 @@ public sealed class AreaRepository : IAreaRepository
     private readonly ILogger<AreaRepository> _logger;
     private readonly IMapper _mapper;
 
-    public AreaRepository(IDbContextFactory<AppDbContext> contextFactory, 
+    public AreaRepository(IDbContextFactory<AppDbContext> contextFactory,
                           IMapper mapper,
                           ILogger<AreaRepository> logger)
     {
@@ -30,17 +30,21 @@ public sealed class AreaRepository : IAreaRepository
     /// </summary>
     public async Task<bool> AddAsync(IArea area)
     {
-        if(area == null)
+        try
         {
+            var areaDb = _mapper.Map<AreaDb>(area);
+            await using (var context = _contextFactory.CreateDbContext())
+            {
+                await context.Areas.AddAsync(areaDb);
+                await context.SaveChangesAsync();
+                return true;
+            }
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError(ex.Message, ex.InnerException, $"Class={nameof(AreaRepository)}", $"Method={nameof(AddAsync)}");
             return false;
         }
-        var areaDb = _mapper.Map<AreaDb>(area);
-        await using (var context = _contextFactory.CreateDbContext())
-        {
-            await context.Areas.AddAsync(areaDb);
-            await context.SaveChangesAsync();
-        }
-        return true;
     }
 
     /// <summary>
@@ -86,9 +90,9 @@ public sealed class AreaRepository : IAreaRepository
         }
         catch (Exception ex)
         {
-            _logger.LogError(ex.Message);
+            _logger.LogError(ex.Message, ex.InnerException, $"Class={nameof(AreaRepository)}", $"Method={nameof(DeleteAsync)}");
+            return false;
         }
-        return false;
     }
 
     /// <summary>
@@ -106,10 +110,10 @@ public sealed class AreaRepository : IAreaRepository
                 return true;
             }
         }
-        catch(Exception ex)
+        catch (Exception ex)
         {
-            _logger.LogError(ex.Message);
+            _logger.LogError(ex.Message, ex.InnerException, $"Class={nameof(AreaRepository)}", $"Method={nameof(UpdateAsync)}");
+            return true;
         }
-        return false;
     }
 }

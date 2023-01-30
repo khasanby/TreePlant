@@ -43,13 +43,13 @@ namespace TreePlant.Database.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: false),
-                    MatureHeight = table.Column<double>(type: "float", nullable: false),
-                    MatureWidth = table.Column<double>(type: "float", nullable: false),
+                    MatureHeightCm = table.Column<double>(type: "float", nullable: false),
+                    MatureWidthCm = table.Column<double>(type: "float", nullable: false),
                     GrowthRateCm = table.Column<double>(type: "float", nullable: false),
                     HarvestTime = table.Column<int>(type: "int", nullable: false),
-                    SoilType = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    SunExposure = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    BearingAge = table.Column<int>(type: "int", nullable: false),
+                    SoilType = table.Column<int>(type: "int", nullable: false),
+                    SunExposure = table.Column<int>(type: "int", nullable: false),
+                    BearingAge = table.Column<double>(type: "float", nullable: false),
                     Price = table.Column<double>(type: "float", nullable: false),
                     TreeTypeId = table.Column<int>(type: "int", nullable: false)
                 },
@@ -71,6 +71,7 @@ namespace TreePlant.Database.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     TreeSortId = table.Column<int>(type: "int", nullable: false),
+                    TreeCount = table.Column<int>(type: "int", nullable: false),
                     AreaId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>

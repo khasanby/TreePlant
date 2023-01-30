@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace TreePlant.Database.Entities;
 
-public sealed class PlantedTreeDb
+public sealed class TreePlantDb
 {
     /// <summary>
     /// Gets and sets id of a tree.
@@ -17,6 +17,11 @@ public sealed class PlantedTreeDb
     /// </summary>
     [ForeignKey(nameof(TreeSortDb))]
     public int TreeSortId { get; set; }
+
+    /// <summary>
+    /// Gets and sets count of planted tree.
+    /// </summary>
+    public int TreeCount { get; set; }
 
     /// <summary>
     /// Gets and sets tree sort.

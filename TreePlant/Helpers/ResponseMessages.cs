@@ -12,5 +12,7 @@
         public const string AreaSuccess = "Area created successfully :)";
 
         public const string PlantSuccess = "Tree planted successfully :)";
+
+        public const string NoTreeFound = "No planted trees found";
     }
 }
